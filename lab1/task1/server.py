@@ -1,5 +1,6 @@
 import socket
 from datetime import datetime
+import time
 
 # Налаштування хоста
 host = '127.0.0.1'
@@ -21,3 +22,17 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 
             received_text = data.decode('utf-8')
             print(f"Отримано о {datetime.now()}: {received_text}")
+
+            # При отриманні ехіт, завершуємо з'єднання
+            if received_text.lower() == 'exit':
+                print(f"З'єднання з {addr} буде закрите.")
+                break
+
+            # Затримка перед відправкою відлуння
+            time.sleep(5)
+
+            # Відправлення відлуння
+            conn.sendall(data)
+
+        # Закривання з'єднання з клієнтом
+        print(f"З'єднання з {addr} закрите.")
