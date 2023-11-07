@@ -9,9 +9,9 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((host, port))  # Підключення до сервера
     while True:
         text_to_send = input("Введіть текст для відправлення або 'exit' для виходу: ")
-        s.sendall(text_to_send.encode('utf-8'))  # Відправлення тексту серверу
         if text_to_send.lower() == 'exit':
             break
+        s.sendall(text_to_send.encode('utf-8'))  # Відправлення тексту серверу
 
         # Очікування відповіді від сервера
         data = s.recv(1024)

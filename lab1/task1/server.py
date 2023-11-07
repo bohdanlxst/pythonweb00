@@ -23,16 +23,20 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             received_text = data.decode('utf-8')
             print(f"Отримано о {datetime.now()}: {received_text}")
 
-            # При отриманні ехіт, завершуємо з'єднання
-            if received_text.lower() == 'exit':
-                print(f"З'єднання з {addr} буде закрите.")
-                break
-
             # Затримка перед відправкою відлуння
             time.sleep(5)
 
             # Відправлення відлуння
-            conn.sendall(data)
+            sent = 0
+            while sent < len(data):
+                sent += conn.send(data[sent:])
+                if sent == 0:
+                    break  # Роз'єднання
+
+            if sent < len(data):
+                print("Не всі дані було відправлено успішно.")
+            else:
+                print(f"Відлуння відправлено о {datetime.now()}")
 
         # Закривання з'єднання з клієнтом
         print(f"З'єднання з {addr} закрите.")
