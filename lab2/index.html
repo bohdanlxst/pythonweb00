@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sample Form</title>
+</head>
+<body>
+    <h2>Sample Form</h2>
+    <form action="/cgi-bin/form_handler.py" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="gender">Gender:</label>
+        <input type="radio" id="male" name="gender" value="Male">
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="gender" value="Female">
+        <label for="female">Female</label><br><br>
+
+        <label for="interests">Interests:</label>
+        <input type="checkbox" id="programming" name="interests" value="Programming">
+        <label for="programming">Programming</label>
+        <input type="checkbox" id="chemistry" name="interests" value="Chemistry">
+        <label for="chemistry">Chemistry</label>
+        <input type="checkbox" id="physics" name="interests" value="Physics">
+        <label for="physics">Physics</label><br><br>
+
+        <label for="group">Group:</label>
+        <select id="group" name="group">
+            <option value="IPZ-31">IPZ-31</option>
+            <option value="IPZ-32">IPZ-32</option>
+            <option value="IPZ-33">IPZ-33</option>
+        </select><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
