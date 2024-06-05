@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .date {
   display:block;
   color: #303030;
@@ -39,4 +40,47 @@
 .item {
     margin-top:10px;
     margin-bottom:10px;
+=======
+.date {
+  display:block;
+  color: #303030;
+  margin:10px;
+  font-size: 20px;
+}
+
+.title{
+  color: #1377BD;
+  font-size: 16px;
+  margin: 4px;
+  font-weight:500;
+}
+
+.title:hover {
+  text-decoration: none !important;
+}
+
+.content{
+  display:block;
+  color: #303030;
+  margin:4px;
+  font-weight:300;
+}
+
+.container{
+  max-width:750px;
+}
+
+.icon-title{
+    display: flex;
+    align-items: center;
+}
+
+.list {
+  list-style-type:none;
+}
+
+.item {
+    margin-top:10px;
+    margin-bottom:10px;
+>>>>>>> 120de884db0d88ae4107c797f5b9917b11c7b18a
 }

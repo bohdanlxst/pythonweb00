@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .site-footer {
     background-color: #333;
     color: #fff;
@@ -8,3 +9,15 @@
 .content {
     padding: 10px; 
 }
+=======
+.site-footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding:5px;
+}
+
+.content {
+    padding: 10px; 
+}
+>>>>>>> 120de884db0d88ae4107c797f5b9917b11c7b18a

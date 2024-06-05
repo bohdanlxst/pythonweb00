@@ -1,3 +1,43 @@
+<<<<<<< HEAD
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename = 'css/contact.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="container text-center">
+    <h1>Contact Me</h1>
+    <p>If you would like to get in touch with me, please use one of the methods below:</p>
+    <div class="contact-info">
+        <p>Email: <a href="mailto:bohdan.ivaniuk.22@pnu.edu.ua">bohdan.ivaniuk.22@pnu.edu.ua</a></p>
+        <p>Phone: +123 456 7890</p>
+        <div class="social-icons">
+            <a href="https://github.com" target="_blank"><img src="static/images/github.svg" alt="GitHub"></a>
+            <a href="https://www.linkedin.com" target="_blank"><img src="static/images/linkedin-logo.svg" alt="LinkedIn"></a>
+            <a href="https://twitter.com" target="_blank"><img src="static/images/twitter.svg" alt="Twitter"></a>
+            <a href="https://www.instagram.com" target="_blank"><img src="static/images/insta.svg" alt="Instagram"></a>
+        </div>
+    </div>
+    <h2>Contact Form</h2>
+    <form action="https://formspree.io/f/{your_form_id}" method="POST">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="message">Message:</label>
+            <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send</button>
+    </form>
+</div>
+{% endblock %}
+=======
 {% extends "base.html" %}
 
 {% block head %}
@@ -36,3 +76,4 @@
     </form>
 </div>
 {% endblock %}
+>>>>>>> 120de884db0d88ae4107c797f5b9917b11c7b18a
