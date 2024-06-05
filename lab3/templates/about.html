@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename = 'css/about.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="container text-center">
+    <h1>About Me</h1>
+    <img src="{{ url_for('static', filename = 'images/profile_image.png') }}" alt="Profile Picture" class="profile-img">
+    <p>Hello! My name is Bohdan Ivaniuk, and I am a student pursuing a degree in Software Engineering. I am passionate about web development and programming. I enjoy creating web applications and learning new technologies to improve my skills. My journey into the world of coding began when I was a teenager, and since then, I have been continuously honing my abilities through various projects and coursework.</p>
+    <h2>Education</h2>
+    <p>Currently, I am enrolled at University, where I am focusing on courses related to web development, software engineering, and computer science fundamentals.</p>
+    <h2>Skills</h2>
+    <ul>
+        <li>HTML, CSS, JavaScript</li>
+        <li>Python, Java</li>
+        <li>React, Angular</li>
+        <li>Node.js, Express.js</li>
+        <li>MySQL, MongoDB</li>
+        <li>Git, GitHub</li>
+    </ul>
+</div>
+{% endblock %}
