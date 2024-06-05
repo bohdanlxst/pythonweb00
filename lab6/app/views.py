@@ -9,11 +9,13 @@ from app import app, db
 from app.forms import FeedbackForm
 from app.models import Feedback
 from app.forms import LoginForm  
+from app.models import Todo
+from app.forms import TodoForm 
 
 app.secret_key = b'secret'
 
 # Path to the JSON file containing user data
-users_json_path = 'lab5/app/static/files/users.json' 
+users_json_path = 'lab6/app/static/files/users.json' 
 
 # Load user data from the JSON file
 with open(users_json_path, 'r') as users_file:
@@ -198,6 +200,37 @@ def info():
     else:
         flash('Ви повинні увійти, щоб отримати доступ до цієї сторінки', 'error')
         return redirect(url_for('login'))
+    
+@app.route('/todo')
+def home():
+    todo_list = db.session.query(Todo).all()
+    form = TodoForm()  
+    return render_template("todo.html", todo_list=todo_list, form=form, common=common) 
+
+@app.route("/add", methods=["POST"])
+def add():
+    form = TodoForm()
+    if form.validate_on_submit():
+        title = form.title.data
+        description = form.description.data
+        new_todo = Todo(title=title, description=description, complete=False)
+        db.session.add(new_todo)
+        db.session.commit()
+    return redirect(url_for("home"))
+
+@app.route("/update/<int:todo_id>")
+def update(todo_id):
+    todo = Todo.query.get_or_404(todo_id)
+    todo.complete = not todo.complete
+    db.session.commit()
+    return redirect(url_for("home"))
+
+@app.route("/delete/<int:todo_id>")
+def delete(todo_id):
+    todo = Todo.query.get_or_404(todo_id)
+    db.session.delete(todo)
+    db.session.commit()
+    return redirect(url_for("home"))
 
 if __name__ == '__main__':
     app.run(debug=True)
