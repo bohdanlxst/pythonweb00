@@ -1,0 +1,42 @@
+[
+  {
+
+    "area": "Programming",
+    "skills": [
+      {
+        "name": "Programming Languages: Python, C++, C (junior)"
+      },
+      {
+        "name": "Web Development: HTML, CSS, JavaScript (junior)"
+      },
+      {
+        "name": "Linux Systems: Command line, bash scripting (junior)"
+      },
+      {
+        "name": "Problem Solving and Algorithm Design"
+      },
+      {
+        "name": "Version Control: Git"
+      },
+      {
+        "name": "Strong Analytical and Debugging Skills"
+      },
+      {
+        "name": "Communication and Team Collaboration"
+      }
+      
+    ]
+  },
+
+  {
+    "area": "Languages",
+    "skills": [
+      {
+        "name": "English: Upper intermediate B2"
+      },
+      {
+        "name": "Ukrainian: Native proficiency"
+      }
+    ]
+  }
+]
