@@ -3,19 +3,31 @@ import os
 import io
 import platform
 from datetime import datetime
-import datetime
-from flask import render_template, request, session, redirect, url_for, flash, make_response
-from app import app, db
-from app.forms import FeedbackForm, TodoForm, LoginForm, ChangePasswordForm, RegistrationForm
-from app.models import Feedback, Todo, User
+from flask import Flask, render_template, request, session, redirect, url_for, flash, make_response
 from flask_login import login_user, current_user, logout_user, login_required
-from app import app
+from app.forms import FeedbackForm, TodoForm, LoginForm, ChangePasswordForm, RegistrationForm
+from app.models import Feedback, Todo, User, db
+from flask import Blueprint
+from .models import Feedback, Todo, User
 
+main_bp = Blueprint('main', __name__)
+
+@main_bp.route('/')
+def index():
+    todo_list = Todo.query.all()
+    return render_template('index.html', todo_list=todo_list)
+    
+@main_bp.route('/about')
+def about():
+    return render_template('about.html')
+main_bp = Blueprint('main', __name__)
+
+app = Flask(__name__)
 app.secret_key = b'secret'
 user_session = {}
 
 # Path to the JSON file containing user data
-users_json_path = 'lab8/app/static/files/users.json'
+users_json_path = 'lab13/app/static/files/users.json'
 
 # Load user data from the JSON file
 with open(users_json_path, 'r') as users_file:
@@ -31,47 +43,40 @@ common = {
     'last_name': 'Ivaniuk',
 }
 
-
 @app.route('/')
 def index():
     return render_template('home.html', common=common)
 
-
 @app.route('/about')
 def biography():
     return render_template('about.html', common=common)
-
 
 @app.route('/skills')
 def skills():
     data = get_static_json("static/files/skills.json")
     return render_template('skills.html', common=common, data=data)
 
-
 @app.route('/contact')
 def contacts():
     return render_template('contact.html', common=common)
-
 
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html', common=common), 404
 
-
 def get_static_file(path):
     site_root = os.path.realpath(os.path.dirname(__file__))
     return os.path.join(site_root, path)
 
-
 def get_static_json(path):
     with open(get_static_file(path), "r", encoding="utf-8") as file:
         return json.load(file)
-    
+
 @app.context_processor
 def utility_processor():
     os_info = platform.platform()
     user_agent = request.headers.get('User-Agent')
-    current_time = datetime.datetime.now()
+    current_time = datetime.now()
     return {
         'os_info': os_info,
         'user_agent': user_agent,
@@ -98,23 +103,6 @@ def feedback():
 
     feedback_data = Feedback.query.all()
     return render_template('feedback.html', form=form, feedback_data=feedback_data, common=common)
-
-# Error handler for 404 Not Found
-@app.errorhandler(404)
-def page_not_found(e):
-    return render_template('404.html', common=common), 404
-
-# Context processor to provide additional data to templates
-@app.context_processor
-def utility_processor():
-    os_info = platform.platform()
-    user_agent = request.headers.get('User-Agent')
-    current_time = datetime.datetime.now()
-    return {
-        'os_info': os_info,
-        'user_agent': user_agent,
-        'current_time': current_time
-    }
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -200,7 +188,7 @@ def info():
     else:
         flash("You are not logged in. Please log in to access this page.", "error")
         return redirect(url_for('login'))
-    
+
 @app.route('/add_cookie', methods=['POST'])
 def add_cookie():
     if 'username' in user_session:
@@ -255,7 +243,6 @@ def delete_all_cookies():
     else:
         return redirect(url_for('login'))
 
-
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
     if request.method == 'POST' or request.method == 'GET':
@@ -289,7 +276,7 @@ def change_password():
 def home():
     todo_list = db.session.query(Todo).all()
     form = TodoForm()  
-    return render_template("todo.html", todo_list=todo_list, form=form, common=common) 
+    return render_template("todo.html", todo_list=todo_list, form=form, common=common)
 
 @app.route("/add", methods=["POST"])
 def add():
@@ -324,7 +311,7 @@ def users():
 @login_required
 def account():
     form = ChangePasswordForm()
-    return render_template('account.html',form=form, user=current_user, is_authenticated=True, title='Account')
+    return render_template('account.html', form=form, user=current_user, is_authenticated=True, title='Account')
 
 if __name__ == '__main__':
     app.run(debug=True)
